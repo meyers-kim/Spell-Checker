@@ -1,0 +1,45 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="content">
+        <div class="container">
+            <h1 class="title">Top Spell Check Errors</h1>
+            <p class="description">Here are the most common spelling errors detected in your submitted texts.</p>
+
+            <h:form>
+                <h:outputLabel for="topX" value="Number of top errors to display:" styleClass="label"/>
+                <h:inputText id="topX" value="#{statisticsBean.topX}" styleClass="input-text"/>
+                <h:commandButton value="Show Statistics" action="#{statisticsBean.loadTopErrors}" styleClass="btn submit-btn"/>
+            </h:form>
+
+            <h:dataTable value="#{statisticsBean.topErrors}" var="error" styleClass="results-table" cellpadding="5">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Wrong Word" />
+                    </f:facet>
+                    <h:outputText value="#{statisticsBean.getWrongWord(error)}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Correct Word" />
+                    </f:facet>
+                    <h:outputText value="#{statisticsBean.getCorrectWord(error)}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Occurrences" />
+                    </f:facet>
+                    <h:outputText value="#{statisticsBean.getErrorCount(error)}"/>
+                </h:column>
+            </h:dataTable>
+
+            <h:button value="Back to Input" outcome="index" styleClass="btn back-btn"/>
+
+        </div>
+    </ui:define>
+</ui:composition>

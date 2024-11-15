@@ -1,0 +1,12 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="exercise2PU" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/MariaDBDS</jta-data-source>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/javaee"/>
+            <property name="jakarta.persistence.jdbc.user" value="javaee"/>
+            <property name="jakarta.persistence.jdbc.password" value="eeavaj"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>

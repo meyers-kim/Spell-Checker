@@ -1,0 +1,44 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <h1 class="title">Spell Checker</h1>
+            
+            <h:form>
+                <h:outputLabel for="inputText" value="Enter text for spell check:" styleClass="label"/>
+                
+                <h:inputTextarea id="inputText" 
+                                 value="#{spellCheckBean.inputText}" 
+                                 rows="10" 
+                                 cols="50" 
+                                 styleClass="input-area" 
+                                 spellcheck="false">
+                    <f:ajax event="keyup" 
+                            render="errorMessages" 
+                            listener="#{spellCheckBean.ajaxCheckSpelling}" />
+                </h:inputTextarea>
+
+                <h:commandButton value="Check Spelling" 
+                                 action="#{spellCheckBean.checkSpelling}" 
+                                 styleClass="btn submit-btn">
+                    <f:ajax render="errorMessages" />
+                </h:commandButton>
+                
+                <h:commandButton value="View Statistics" 
+                                 action="statistics" 
+                                 styleClass="btn stats-btn"
+                                 disabled="#{!spellCheckBean.statisticsButtonEnabled}" />
+                
+                <h:panelGroup id="errorMessages" style="display:block; margin-top:10px;">
+                    <h:outputText value="#{spellCheckBean.spellingErrorsHtml}" 
+                                  escape="false" 
+                                  styleClass="error-display"/>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
